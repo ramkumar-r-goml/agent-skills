@@ -1,0 +1,8 @@
+---
+description: Writing, rewriting or auditing technical documentation (READMEs, architecture docs, ADRs, API/CLI reference, runbooks, postmortems, AGENTS.md) without AI-sounding prose
+alwaysApply: false
+---
+
+Before writing or editing technical documentation, read `skills/writing-technical-documentation/SKILL.md` and follow it.
+Read files under its `references/` folder only when SKILL.md points to them.
+After drafting, run `python3 skills/writing-technical-documentation/scripts/slop_scan.py <file>` and fix what it flags.
