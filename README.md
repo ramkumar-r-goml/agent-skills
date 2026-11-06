@@ -47,7 +47,13 @@ npx skills check
 npx skills update writing-technical-documentation
 ```
 
-Pin a release if you need one to stay fixed: `npx skills add ramkumar-r-goml/agent-skills@v2.0.0 --skill writing-technical-documentation`. See [CHANGELOG.md](CHANGELOG.md) for what changed.
+To stay on one release, pin its tag with `#`. In `owner/repo@name`, `name` selects a skill and does not pin a version. Keep the quotes, because some shells treat `#` as special:
+
+```bash
+npx skills add 'ramkumar-r-goml/agent-skills#v2.0.0' --skill writing-technical-documentation
+```
+
+See [CHANGELOG.md](CHANGELOG.md) for what changed.
 
 ## Develop
 
