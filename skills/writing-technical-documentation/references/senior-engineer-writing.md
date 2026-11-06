@@ -31,12 +31,18 @@ Contents
 - They use plain words. Complexity is in the system, not in the sentences.
 - They do not sell. Documentation informs; it does not persuade the reader the work is good.
 - They treat docs like code: one source of truth, reviewed, tested, versioned, deleted when wrong.
+- They choose the right place for each fact. Google's guidance runs from meaningful names, to comments for what code cannot say, to method docs for the contract, to a README for a directory's purpose, to `docs/` for setup and release, to design docs as records of decisions.
 
 ## 2. Answer first
 
 Put the answer in the first one or two sentences. Then give supporting detail in descending order of importance. A busy reader who stops after the first paragraph should still have the main point.
 
+Two readers arrive at every page. A seeker knows what they want and scans, so keep structure consistent. A stumbler arrived from search or a link and wonders if this page applies to them, so the opening must say who it is for and who it is not for. For anything likely to be read out of context, the first paragraphs should settle who, what, when (a date or version), where, and why.
+
+<!-- slop-scan: off -->
 Weak: "This document provides an overview of the authentication system and its various components, and discusses design considerations."
+<!-- slop-scan: on -->
+
 Strong: "Requests are authenticated with short-lived JWTs issued by the `auth` service (15-minute expiry) and verified at the gateway. Refresh tokens live in Redis for 30 days."
 
 For decisions: state the decision, then the reason, then the alternatives. For procedures: state the goal and prerequisites, then steps. For incidents: impact, cause, fix, then timeline.
@@ -109,7 +115,8 @@ Use a diagram when the relationships are the point: components and data flow, a 
 - Group by task or question. Keep sections the same shape when they hold the same kind of thing.
 - Put the most-used material at the top and the rarely-used material at the bottom.
 - Use lists for parallel items and tables for attributes. Use prose for reasons.
-- Do not duplicate content. Link.
+- Give each document one purpose. If a section serves a different reader, it belongs on a different page, linked.
+- Do not duplicate content. Link. Accept a small repeat a reader needs in place.
 - End when the content ends. No conclusion that repeats the doc. A closing section is for next steps, open questions, or contacts, if there are any.
 
 ## 12. Reviewing and being reviewed
@@ -118,6 +125,7 @@ Review your own doc as a skeptical reader: pick five claims at random and verify
 
 ## 13. Before and after rewrites
 
+<!-- slop-scan: off -->
 1. Before: "Our robust, scalable platform seamlessly integrates with a wide range of services, empowering teams to unlock new insights."
    After: "The platform ingests events from Kafka, S3, and HTTP webhooks, and writes aggregated results to Postgres. It handles 12k events per second on a single c6i.2xlarge (load test, 2026-09-30)."
    Why: replaced adjectives and verbs with the inputs, outputs, and a measurement.
@@ -173,6 +181,8 @@ The strong version says what it does, its limit, an alternative, and a command w
 Weak: "After careful consideration of many options, we decided to adopt Kafka as it is a best-in-class solution that provides numerous benefits."
 
 Strong: "We will use Kafka for order events. The consumers need replay of up to 7 days to rebuild search indexes, which SQS cannot do. Kafka adds operational load: we will use managed MSK and accept about $1,400 per month. Considered and rejected: SQS (no replay), Kinesis (shard management, team has no experience), and polling the orders table (lag above 30 s at peak)."
+
+<!-- slop-scan: on -->
 
 ## 16. Quality tests
 

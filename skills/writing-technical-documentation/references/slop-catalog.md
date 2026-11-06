@@ -1,6 +1,6 @@
 # AI writing pattern catalog
 
-An exhaustive list of patterns that mark text as machine-generated or machine-flavored, with the fix for each. Use it in Phase 6 and when cleaning someone's draft. Run `scripts/slop_scan.py` first; it covers the lexical and formatting patterns. The structural and semantic ones need your judgment.
+Patterns that mark text as machine-generated or machine-flavored, with the fix for each. Use it during the prose pass and when cleaning someone's draft. Run `scripts/slop_scan.py` first; it covers the lexical and formatting patterns and some structure. The semantic ones need your judgment. Sources include Wikipedia's "Signs of AI writing", which editors keep current.
 
 Contents
 0. How to use this catalog
@@ -18,10 +18,12 @@ Contents
 12. Not reliable indicators (do not flag these alone)
 13. Model generations and drift
 14. Scoring and clusters
-15. Rewrite procedure
+15. Rewrite procedure and when not to act
 
+<!-- slop-scan: off -->
 ## 0. How to use this catalog
 
+- Strength varies. Act on one sighting of leaked assistant text, tool markup, or negative parallelism. Treat vocabulary, transition words, and em dashes as weak alone.
 - One instance is a yellow flag. Three or more in different categories in a short span is a cluster, and clusters are the signal.
 - Fix the cause: a vague sentence needs a fact. Synonym swaps keep the emptiness. If you cannot find the fact, delete the sentence or ask.
 - Do not over-police. Formal register, correct grammar, a transition word, a list, or a heading is not a defect by itself. Humans use all of these. Detection by pattern is probabilistic; the goal is good prose, not evasion.
@@ -56,11 +58,15 @@ Fix: name the actual thing.
 pivotal; crucial; vital; essential (as filler); paramount; robust; seamless; comprehensive; multifaceted; nuanced; vibrant; meticulous; intricate; dynamic; innovative; cutting-edge; state-of-the-art; groundbreaking; transformative; revolutionary; unparalleled; unprecedented; holistic; scalable (unproven); powerful; elegant; sophisticated; versatile; invaluable; indispensable; remarkable; notable; profound; compelling; captivating; bustling; rich (as in rich history); enduring; enigmatic; stunning; breathtaking; lasting; renowned; commendable; instrumental; strategic; critical (as filler); evolving; ever-evolving; fast-paced; best-in-class; world-class; enterprise-grade; production-ready (undefined); battle-tested; mission-critical; future-proof; turnkey; plug-and-play; effortlessly; seamlessly; truly; genuinely; fundamentally; incredibly; remarkably; undeniably; arguably; notably; importantly; crucially; ultimately; essentially; basically; effectively; particularly; significantly (without a number).
 Fix: remove, or replace with a measurement, a mechanism, or a comparison.
 
-### 2.4 Connectors and transitions overused
-Moreover; Furthermore; Additionally; In addition; Consequently; Thus; Hence; Nevertheless; Nonetheless; That said; With that said; Having said that; On the other hand; In essence; In summary; In conclusion; Overall; Ultimately; Indeed; Notably; Importantly; Interestingly; Crucially; Specifically (as opener); Accordingly; Subsequently.
-Flag when two or more start consecutive sentences or paragraphs, or when each paragraph opens with one. Fix: delete; or let the order of sentences carry the logic; use "and", "but", "so", "because".
+### 2.4 Era vocabulary
 
-### 2.5 Technical-doc stock words
+Each model generation overuses different ordinary words, and any one of them is normal. Density is what counts. Wikipedia's lists are rough: GPT-4 era: additionally, boasts, bolstered, crucial, delve, emphasizing, enduring, garner, intricate, interplay, key, landscape, meticulously, pivotal, underscore, tapestry, testament, valuable, vibrant. GPT-4o era: align with, enhance, fostering, highlighting, showcasing. Mid-2026 onward: challenge, clearer, dependable, echoed, foster, leverage, matters, multifaceted, practical, prioritize, quietly, steady, universally, along with more periods and shorter sentences of about 8 to 20 words.
+
+### 2.5 Connectors and transitions overused
+Moreover; Furthermore; Additionally; In addition; Consequently; Thus; Hence; Nevertheless; Nonetheless; That said; With that said; Having said that; On the other hand; In essence; In summary; In conclusion; Overall; Ultimately; Indeed; Notably; Importantly; Interestingly; Crucially; Specifically (as opener); Accordingly; Subsequently.
+These words alone do not indicate AI text, and style guides accept them. Flag when two or more start consecutive sentences or paragraphs, or when each paragraph opens with one. Fix: delete; or let the order of sentences carry the logic; use "and", "but", "so", "because".
+
+### 2.6 Technical-doc stock words
 seamless integration; robust architecture; scalable solution; powerful API; intuitive interface; lightweight; blazing fast; developer-friendly; out of the box; under the hood; production-grade; enterprise-ready; modular and extensible; flexible and configurable; highly performant; cutting-edge technology; best practices; industry standard; end-to-end solution; holistic approach; single pane of glass; one-stop shop; full-stack; next-generation.
 Fix: state what it does, in numbers or mechanisms.
 
@@ -73,7 +79,7 @@ Delete or replace each.
 - "Now more than ever"
 - "It's worth noting that", "It's important to note that", "It should be noted", "It is worth mentioning", "Notably,", "Importantly,", "Needless to say", "It goes without saying"
 - "Let's dive in", "Let's delve into", "Let's explore", "Let's break it down", "Let's unpack this", "Let's get started" (as filler), "Without further ado"
-- "Here's the thing", "Here's why", "Here's what you need to know", "Here's the kicker"
+- "Here's the thing", "Here's why", "Here's what you need to know", "Here's the kicker", "Here's where it gets interesting", "It gets better", "The short answer is", "What's more"
 - "Imagine a world where"
 - "At its core", "At the heart of", "At the end of the day", "When it comes to", "In terms of", "With regard to", "In order to"
 - "plays a crucial / pivotal / vital / key role in", "serves as a testament to", "stands as a reminder", "marks a significant milestone / shift", "is a game-changer", "paves the way for", "sets the stage for", "opens the door to", "takes it to the next level", "a rich tapestry of", "a wide range of", "a variety of", "a plethora of", "a myriad of", "a number of" (without a number)
@@ -94,6 +100,8 @@ Delete or replace each.
 - "can help you", "can be used to", "is designed to", "aims to", "strives to", "seeks to" as vague hedged verbs (use the real verb when the thing does it)
 - "a testament to", "a reminder that", "a nod to"
 - "Remember, ..." / "Keep in mind that ..." as filler
+- "Contrary to popular belief", "You might think", "You may be wondering", "Some might say" (arguing with no one)
+- "Trusted by thousands", "loved by developers", "used by teams at" with no number or source
 - "By leveraging X, you can Y"
 - "Take your X to the next level"
 - "unlock the full potential of"
@@ -104,8 +112,8 @@ Delete or replace each.
 ## 4. Sentence-level structures
 
 ### 4.1 Negative parallelism
-"It's not X, it's Y." "This isn't just X; it's Y." "Not only X but also Y." "Not X. Not Y. Just Z." "No X, no Y, just Z." "More than just X." "Less about X, more about Y."
-Why it is slop: it sets up a straw position to sound insightful. Fix: state Y only.
+"It's not X, it's Y." "This isn't just X; it's Y." "Not only X but also Y." "Not X. Not Y. Just Z." "No X, no Y, just Z." "More than just X." "Less about X, more about Y." Recent models favor a quieter form: "Y rather than X" and "X, not Y" as a repeated habit.
+Why it is slop: it sets up a straw position to sound insightful. Fix: state Y only. A real contrast the reader needs, such as "use `--force-with-lease`, not `--force`", stays.
 
 ### 4.2 Self-posed questions
 "The result? Faster builds." "Why does this matter? Because..." "What does this mean for you?" Fix: make the statement.
@@ -187,6 +195,18 @@ A paragraph with one real fact buried among vague sentences. Fix: lead with the 
 
 ### 4.28 Time parasites
 "Over the years", "In recent years", "Nowadays", "Traditionally", "Historically" with no dates. Fix: date or delete.
+
+### 4.29 One-line closers and staged run-ups
+A paragraph ending in a short punchy line ("And that's the point.", "That's the whole trick."), or opening with a setup that delays the claim ("Here's what happened."). Fix: state the claim plainly and stop.
+
+### 4.30 Hyphenated pairs
+Stacked compound modifiers for rhythm ("fast-moving, high-stakes, data-driven teams"). Fix: name the teams, or cut.
+
+### 4.31 Heading restated
+The first sentence under a heading repeats the heading ("## Configuration" then "Configuration is handled by..."). Fix: start with new information.
+
+### 4.32 Writing about the document
+"This section explains", "The following table shows", "as this guide demonstrates". Fix: state the content.
 
 ## 5. Paragraph and document structures
 
@@ -270,7 +290,7 @@ A whole section with no names, numbers, paths, or commands. Fix: investigate and
 
 ## 7. Formatting and encoding
 
-- Em dashes (U+2014) in density; en dashes used as em dashes.
+- Em dashes (U+2014) in density; en dashes used as em dashes. Wikipedia now lists em dash overuse as a historical sign, since newer models use far fewer, so absence proves nothing. This skill still avoids them as a style rule.
 - Curly (smart) quotes and apostrophes in Markdown or code-adjacent files.
 - Unicode arrows and symbols (U+2192, U+21D2, U+2713, U+2714, U+2022 as inline bullet, U+2026 ellipsis) in prose or source docs.
 - Emojis in headings, bullets, or status markers (checkmarks, rockets, sparkles, light bulbs, warning signs).
@@ -285,7 +305,8 @@ A whole section with no names, numbers, paths, or commands. Fix: investigate and
 - Markdown artifacts in plain text: stray `**`, `##`, backticks inside non-Markdown output.
 - Hidden or zero-width characters, non-breaking spaces, trailing whitespace pasted from chat UIs.
 - Placeholder brackets left in: `[Insert X]`, `[Your Name]`, `TODO`, `TBD`, `lorem ipsum`.
-- Turn-key citations markup leaked from tools (`oaicite`, `contentReference`, `turn0search0`, `utm_source=chatgpt.com`, `:contentReference[oaicite:0]`).
+- Citation markup leaked from tools (`oaicite`, `contentReference`, `oai_citation`, `turn0search0`, `attached_file`, `utm_source=chatgpt.com`, `utm_source=openai`, `referrer=grok.com`, a stray `↩` after a footnote).
+- Placeholder dates and URLs left in: `2025-XX-XX`, `INSERT_SOURCE_URL`.
 - Broken or fabricated reference markup; footnotes pointing nowhere.
 - Overlong lines or decorative ASCII boxes.
 
@@ -368,13 +389,14 @@ Fix: Phase 2 and Phase 5 of the workflow.
 
 ## 11. Leaked-assistant artifacts
 
-Delete on sight: "As an AI", "I cannot browse", "knowledge cutoff", "I don't have access to", "Here is the revised version", "Certainly! Here's", "I hope this helps", "Let me know", "Sure, here", prompts or instructions echoed in the text, "[Your Name]", "[Company]", "Note to self", markup like `oaicite`, `contentReference`, `turn0search`, `utm_source=chatgpt.com`, `citeturn`, `grok_card`, "Source: [1]" with no list, and tool-call remnants.
+Delete on sight: "As an AI", "I cannot browse", "knowledge cutoff", "I don't have access to", "Here is the revised version", "Certainly! Here's", "I hope this helps", "Let me know", "Sure, here", "check this before publishing", prompts or instructions echoed in the text, "[Your Name]", "[Company]", "Note to self", markup like `oaicite`, `contentReference`, `oai_citation`, `turn0search`, `utm_source=chatgpt.com`, `citeturn`, `grok_card`, "Source: [1]" with no list, and tool-call remnants.
 
 ## 12. Not reliable indicators
 
 Do not flag these alone, and do not "fix" them just to look human:
 - Correct grammar, spelling, and punctuation.
-- Formal register or neutral tone in reference docs.
+- Formal register or neutral tone in reference docs. "Bland" prose is not evidence either.
+- Transition words such as "Additionally" or "Notably" on their own.
 - Parallel list structure in a real list.
 - Use of "however" or "therefore" where the logic needs it.
 - A table, headings, or a numbered list.
@@ -389,16 +411,22 @@ Adding errors, slang, or quirks to fake humanity is a failure. Aim for specific,
 
 ## 13. Model generations and drift
 
-- Word-level tells shift as models change: "delve" peaked in earlier generations and declined; newer outputs favor other words (genuinely, load-bearing, surface, land, sit). Do not rely on a fixed list.
+- Word-level tells shift as models change. See section 2.4, and do not rely on a fixed list.
 - Structure persists across generations: negative parallelism, rule of three, bold-lead bullets, preambles and recaps, significance inflation, trailing participles, uniform section shape.
-- Detectors are probabilistic. Do not claim a text is AI or human on the basis of a score. Use the catalog to improve text.
-- Re-read this catalog's vocabulary lists with suspicion every few months; add what you see in current outputs.
+- A 2025 study found people no better than chance at telling LLM text from human text, and detectors have real error rates. Do not claim a text is AI or human on the basis of a score. Use the catalog to improve text.
+- Review this catalog's vocabulary lists every few months against Wikipedia's page and current outputs.
 
 ## 14. Scoring and clusters
 
-`slop_scan.py` weights hits by category and reports per 1,000 words. Rough guide: under 5 is clean for technical docs; 5 to 15 needs a pass; above 15 needs a rewrite from the evidence ledger. Treat the score as a prompt for judgment: a short README with two hits can be worse than a long guide with five.
+`slop_scan.py` reports two things. The score counts AI-writing signals per 1,000 words, with a cap per category so one habit cannot dominate, and a floor of 300 words so a short text is not judged on two hits. Style notes (filler words, heading habits, wordy phrases) are listed and counted separately, because people write them too.
 
-A cluster is three or more different categories within about 150 words. Fix clusters first.
+| Score | Band | Meaning |
+|---|---|---|
+| Under 8 | Clean | 90 percent of the 115 human-written READMEs and reference pages used for calibration |
+| 8 to 20 | Needs a pass | Fix clusters and high-weight hits |
+| Over 20 | Rewrite from evidence | 3 percent of the calibration set; template or unedited AI text is likely |
+
+Treat the score as a prompt for judgment. A cluster is three or more AI-signal categories within about eight lines. Fix clusters first.
 
 ## 15. Rewrite procedure
 
@@ -407,6 +435,9 @@ A cluster is three or more different categories within about 150 words. Fix clus
 3. If a fact exists: rewrite the sentence around it.
 4. If no fact exists: delete the sentence.
 5. If the reader needs the idea but you lack the fact: ask the user or mark `[unverified: ...]`.
-6. After rewrites, check for new tells introduced by the rewrite (often "ensuring", em dashes, and bold leads).
-7. Rescan. Read once for flow and sentence-length variation.
-8. Report the score change and any facts still missing.
+6. After rewrites, check for new tells introduced by the rewrite (often "ensuring", colons, and bold leads).
+7. Check the rewrite against the original: every supported claim survives, and no fact was added that you cannot source.
+8. Rescan. Read once for flow and sentence-length variation.
+9. Report the score change and any facts still missing.
+
+When not to act: leave quotations, names, titles, error messages, and identifiers as they are. If the user supplies a writing sample or the text has a clear human voice, that voice overrides these defaults, including punctuation habits. The goal is good prose. Hiding authorship is not the goal, and adding errors to look human is a failure.

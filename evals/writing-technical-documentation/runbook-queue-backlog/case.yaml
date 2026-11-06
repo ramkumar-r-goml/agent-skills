@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: runbook-queue-backlog
+expected_outcome: |
+  A runbook whose every command, threshold, and log event comes from the code, with marked gaps where the repo cannot supply a fact, and no invented names.
+context:
+  scaffold_script: place-files.sh

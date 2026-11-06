@@ -29,6 +29,7 @@ Contents
 - Active voice. Name the actor. "The worker retries three times", not "Three retries are performed".
 - Present tense for behavior. "The API returns 404", not "will return".
 - Plain, direct, neutral. Friendly means clear, not chatty. No jokes in reference text, no exclamation marks, no rhetorical questions.
+- Match the project's voice when it has a clear one, and when cleaning a person's draft keep their voice. These rules are defaults.
 - State requirements with must, should, may in the RFC 2119 sense when precision matters, and say so once.
 - Commit to a claim or mark it unverified. Do not hedge with may, might, can potentially, generally, typically unless you can state the condition.
 
@@ -44,6 +45,7 @@ Contents
 
 ## 3. Words
 
+<!-- slop-scan: off -->
 - Use the term the code uses. One name per concept, everywhere. Define it on first use if the reader may not know it.
 - Prefer short, common words: use, not utilize; start, not commence; show, not demonstrate; help, not facilitate; about, not approximately where precision is not needed.
 - No Latin abbreviations (e.g., i.e., etc., via, vs.) in prose; write "for example", "that is", "and so on" (better, list all), "through", "versus".
@@ -54,6 +56,8 @@ Contents
 - Do not use "should" for steps. "Run" or "Click", not "You should run".
 - Use "can" for ability and "may" for permission or possibility, sparingly.
 - Do not use "and/or"; choose, or write "A, B, or both".
+
+<!-- slop-scan: on -->
 
 ## 4. Headings
 
@@ -84,7 +88,10 @@ Contents
 - List prerequisites before step 1: versions, access, tools, prior setup.
 - Provide a verification step at the end and a path for failure.
 - Optional steps are labeled "Optional:" at the start of the step. A step with alternatives lists them as separate subsections, not as inline choices.
-- Do not put commands and their explanations in the same sentence as the command. Put the sentence, then the code block.
+- Order a complex step this way: describe the action, give the command, explain placeholders, explain the command if needed, show output, explain the result.
+- Say what to do, and do not write "run the following command". Do not use "above" or "below"; link to the place.
+- Give the best method only. Link to a repeated procedure instead of copying it.
+- Use a one-sentence form, not a numbered list, for a single-step procedure.
 
 ## 7. Tables
 
@@ -160,11 +167,11 @@ Do not rename identifiers that exist in code or third-party APIs. Quote them and
 
 ## 14. Timeless text
 
-Avoid words that tie text to a moment: currently, now, new, newly, recently, soon, upcoming, latest, modern, today, as of this writing, in the future, in the near term, at the moment, still, no longer (unless in migration or changelog), will be (for planned work). Instead, state the version or date ("Since v2.3, ...", "Planned for v3, see issue #123"), or say what is true. Do not document features that are not shipped as if they were. Mark roadmap items clearly and keep them out of reference pages.
+Avoid words that tie text to a moment: currently, now, new, newly, recently, soon, upcoming, latest, modern, today, as of this writing, in the future, in the near term, at the moment, still, no longer (unless in migration or changelog), will be (for planned work). Instead, state the version or date ("Since v2.3, ...", "Planned for v3, see issue #123"), or say what is true. Do not announce future features in documentation, and do not document unshipped features as if they exist. Keep roadmap items out of reference pages.
 
 ## 15. Placeholders and example data
 
-- Placeholders are uppercase with underscores or angle brackets, consistent within the doc: `<PROJECT_ID>`, `YOUR_API_KEY`. Explain each once, right after first use.
+- Placeholders are uppercase with underscores, in angle brackets if the project does that, and consistent within the doc: `<PROJECT_ID>`, `API_KEY`. Avoid `MY_` and `YOUR_` prefixes, hyphens, and lowercase. Explain each once, right after the code block: "Replace `PROJECT_ID` with your Google Cloud project ID."
 - Example domains: use `example.com`, `example.org` (RFC 2606). Example IPv4: 192.0.2.0/24, 198.51.100.0/24, 203.0.113.0/24 (RFC 5737). IPv6: 2001:db8::/32 (RFC 3849). Example emails: `user@example.com`. Phone numbers: use reserved fictional ranges for the relevant country.
 - AWS example account ID: 123456789012. Do not use real account IDs, ARNs, bucket names, or hostnames from the repo unless the user asks for them.
 - Example names: neutral, short, realistic for the domain (`orders`, `invoice-service`), not cute.

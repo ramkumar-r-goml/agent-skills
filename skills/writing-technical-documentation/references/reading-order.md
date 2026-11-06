@@ -35,8 +35,8 @@ Before reading, fix the scope from the request: whole system, one service, one f
 ## 3. The eight tiers, in order
 
 ### Tier 1: Instructions for humans and agents about the repo
-`AGENTS.md`, `CLAUDE.md`, `.claude/`, `.cursorrules`, `.github/copilot-instructions.md`, `CONTRIBUTING.md`, `CODEOWNERS`, `SECURITY.md`, `docs/CONTRIBUTING*`, `.editorconfig`, style guides.
-Read fully. These tell you conventions, commands, and what the maintainers consider important. They also tell you how docs are expected to look.
+`AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.claude/`, `.cursor/rules/`, `.cursorrules`, `.windsurfrules`, `.github/copilot-instructions.md`, `CONTRIBUTING.md`, `CODEOWNERS`, `SECURITY.md`, `docs/CONTRIBUTING*`, `.editorconfig`, style guides.
+Read fully. These tell you conventions, commands, and what the maintainers consider important. They also tell you how docs are expected to look. Note the doc tooling too (`mkdocs.yml`, `docusaurus.config.*`, `conf.py`, `.vale.ini`), which decides where a page goes and which rules it must pass. The inventory script reports these.
 
 ### Tier 2: Existing documentation
 `README*`, `docs/`, `doc/`, `wiki/`, `ADR/`, `adr/`, `docs/decisions/`, `rfcs/`, `design/`, `CHANGELOG*`, `UPGRADING*`, `MIGRATION*`, diagrams (`*.drawio`, `*.mmd`, `*.puml`, `*.excalidraw`), OpenAPI and AsyncAPI specs, `openapi.yaml`, `swagger.json`, `schema.graphql`, `*.proto`.
@@ -58,8 +58,8 @@ The surface where the system touches the outside:
 
 Useful searches (adapt to the language):
 ```
-grep -rnE "@(app|router|blueprint)\.(get|post|put|delete|route)|app\.(get|post|put|delete)\(|@(Get|Post|Put|Delete)Mapping|router\.(GET|POST)" --include=*.{py,js,ts,java,go,kt}
-grep -rnE "os\.environ|process\.env|getenv|System\.getenv|viper\.|config\." .
+grep -rnE "@(app|router|blueprint)\.(get|post|put|delete|route)|app\.(get|post|put|delete)\(|@(Get|Post|Put|Delete)Mapping|router\.(GET|POST)|\[Http(Get|Post|Put|Delete)|\.Map(Get|Post)\(" --include=*.{py,js,ts,java,go,kt,cs}
+grep -rnE "os\.environ|process\.env|getenv|System\.getenv|Environment\.GetEnvironmentVariable|viper\.|config\." .
 grep -rnE "boto3\.client|new \w+Client\(|requests\.(get|post)|fetch\(|axios\." .
 grep -rnE "open\(|fs\.(read|write)|writeFile|readFile" .
 ```
