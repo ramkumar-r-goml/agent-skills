@@ -142,6 +142,8 @@ Paths are relative to this skill's folder. From a project, run `python3 <skill-d
 - Get today's date from the system before writing a date.
 - Keep your process out of the document. "Checked by" and `To confirm` go in the report. The document keeps marked gaps and one last-verified line.
 - A low `slop_scan` score does not make a document good. Never accuse an author of using AI.
+- Every revision round gets stage 4 again, however small the change. A fixed count or renamed section often leaves a stale copy elsewhere.
+- When a Word file comes back, ask which file is the source. If the owner made their edited Word file the main version, sync the Markdown from it and never export over it: `references/pandoc.md` section 9.
 
 ## Push back or limit scope
 
@@ -203,4 +205,4 @@ Document types. Read the one you are writing:
 | Model card, LLM or agent flow | `references/types/ai-systems.md` |
 | Infrastructure and operations | `references/types/infrastructure.md` |
 
-Scripts, all optional: `scripts/repo_inventory.py` lists a repo in reading order. `scripts/verify_refs.py` checks a doc against a repo. `scripts/slop_scan.py` scans prose for AI patterns. `scripts/doc_audit.py` audits a doc set or lists docs affected by a diff. `scripts/export_doc.py` converts with pandoc. Assets: `assets/templates/docs-brief.md`, `assets/pandoc/`, `assets/ci/`.
+Scripts, all optional: `scripts/repo_inventory.py` lists a repo in reading order. `scripts/verify_refs.py` checks a doc against a repo. `scripts/slop_scan.py` scans prose for AI patterns. `scripts/doc_audit.py` audits a doc set or lists docs affected by a diff. `scripts/export_doc.py` converts with pandoc. `scripts/finish_docx.ps1` fills the contents list and fixes table layout in an exported Word file, on Windows with Word. Assets: `assets/templates/docs-brief.md`, `assets/pandoc/`, `assets/ci/`.

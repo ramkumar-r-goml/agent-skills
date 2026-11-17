@@ -296,7 +296,10 @@ def build_reference(base_docx, output, font="Calibri", heading_font=None, mono="
             elif item.filename == "[Content_Types].xml":
                 data = data.decode("utf-8").replace("</Types>", '<Override PartName="/word/footer1.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.footer+xml" /></Types>').encode("utf-8")
             dst.writestr(item, data)
-        dst.writestr("word/footer1.xml", FOOTER_XML)
+        # Stamp the new part like the copied ones. A clock timestamp made two exports a second apart differ.
+        footer = zipfile.ZipInfo("word/footer1.xml", src.getinfo("word/document.xml").date_time)
+        footer.compress_type = zipfile.ZIP_DEFLATED
+        dst.writestr(footer, FOOTER_XML)
     os.replace(tmp, output)
 
 
@@ -682,6 +685,11 @@ def add_style_options(p):
 
 
 def main(argv=None):
+    for stream in (sys.stdout, sys.stderr):  # paths and titles can hold non-ASCII text
+        try:
+            stream.reconfigure(encoding="utf-8", errors="replace")
+        except (AttributeError, ValueError):
+            pass
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="command", required=True)
 

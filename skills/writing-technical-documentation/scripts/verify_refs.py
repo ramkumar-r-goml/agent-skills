@@ -36,6 +36,7 @@ import urllib.error
 import urllib.request
 from concurrent.futures import ThreadPoolExecutor
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # find doclib under python -I
 import doclib
 
 # Output stays small enough that agent harnesses do not truncate it; --limit 0 shows all.
@@ -695,6 +696,7 @@ def verify_doc(doc, repo):
 
 
 def main(argv=None):
+    doclib.utf8_console()
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("docs", nargs="+", help="Markdown files or directories to check")
     ap.add_argument("--repo", required=True, help="repository root to check against")

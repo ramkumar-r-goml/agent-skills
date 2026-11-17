@@ -2,13 +2,29 @@
 """Shared helpers for this skill's scripts: repo file listing and Markdown parsing.
 
 Not a command. Imported by repo_inventory.py, verify_refs.py, slop_scan.py, and
-doc_audit.py, which find it because Python puts a script's own directory on
-sys.path. Standard library only.
+doc_audit.py. Each of them adds its own directory to sys.path before importing
+this module, so they also work under `python -I`, which leaves that directory
+out. Standard library only.
 """
 import json
 import os
 import re
 import subprocess
+import sys
+
+
+def utf8_console():
+    """Make stdout and stderr write UTF-8, replacing what they cannot encode.
+
+    Reports quote document text, which can hold arrows, accents, or CJK. On a
+    console with a legacy code page, such as cp1252 on Windows, printing that
+    text raises UnicodeEncodeError and the script dies mid-report.
+    """
+    for stream in (sys.stdout, sys.stderr):
+        try:
+            stream.reconfigure(encoding="utf-8", errors="replace")
+        except (AttributeError, ValueError):
+            pass  # replaced by a test harness or already detached
 
 SKIP_DIRS = {
     ".git", ".hg", ".svn", "node_modules", "vendor", ".venv", "venv", "env", "__pycache__",

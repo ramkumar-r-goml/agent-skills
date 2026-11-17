@@ -12,11 +12,20 @@ All notable changes to this repo are documented here. This project follows [Sema
 - Diagram guidance for three cases: existing diagrams, new diagrams, none.
 - Six AI-writing patterns in `references/slop-catalog.md` (false agency, analogy in place of mechanism, tie-back ending, and others).
 - `docs/sources-and-licenses.md` and `NOTICE`. Two eval cases: a vague request and a developer-supplied table of contents.
+- `writing-technical-documentation`: `scripts/finish_docx.ps1` finishes an exported Word file in Word on Windows. It fills the contents list, gives contents entries hanging indents with aligned page numbers, sets fixed table widths from cell text or a JSON width map, keeps rows on one page, and repeats header rows. It can also save a PDF. Word runs in a background job with a time limit, and only Word processes started by the run are stopped.
+- `references/pandoc.md`: what to do when an owner makes their edited Word file the main version (back up, import, diff, sync the Markdown, edit in place), finishing in Word on Windows, and the duplicate-title gotcha.
+- `SKILL.md` gotchas: rerun stage 4 on every revision round, and ask which file is the source when a Word file comes back.
 
 ### Changed
 
 - The nine-step checklist is now five stages with one stop. Scripts are optional, and every check has a by-hand route.
 - Unknowns are marked `[To confirm: ...]`. `[unverified: ...]` is still accepted.
+
+### Fixed
+
+- The Python scripts crashed under `python -I` (the isolated mode recommended for untrusted repos) with `ModuleNotFoundError: doclib`. They now add their own folder to the import path.
+- Reports crashed with `UnicodeEncodeError` on consoles with a legacy code page, such as cp1252 on Windows, when a document held characters like arrows. Output is now UTF-8, with replacement for anything the console cannot encode.
+- `export_doc.py`: two Word exports of the same input could differ, because the footer part was stamped with the current time. It now carries the reference document's fixed timestamp, so `SOURCE_DATE_EPOCH` gives byte-identical files again.
 
 ## [2.0.0] - 2026-11-06
 

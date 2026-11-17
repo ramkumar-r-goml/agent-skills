@@ -1,10 +1,12 @@
 """Tests for repo_inventory.py and doc_audit.py."""
 import json
 import os
+import subprocess
+import sys
 import tempfile
 import unittest
 
-from support import FIXTURE, FIXTURE_SECRET, git, run_main, temp_repo, write_files
+from support import FIXTURE, FIXTURE_SECRET, SCRIPTS, git, run_main, temp_repo, write_files
 
 import doc_audit
 import doclib
@@ -204,6 +206,30 @@ class ChangedSince(unittest.TestCase):
         _, out, _ = run_main(doc_audit.main, [self.repo, "--changed-since", "base"])
         self.assertIn("still mentions removed", out)
 
+
+
+class Console(unittest.TestCase):
+    """The scripts run as separate processes, the way an agent calls them."""
+
+    def run_script(self, name, *args, env=None):
+        # -B: no .pyc files in the skill folder, which the packaging test forbids.
+        return subprocess.run([sys.executable, "-I", "-B", os.path.join(SCRIPTS, name), *args],
+                              capture_output=True, env=env, timeout=60)
+
+    def test_scripts_import_doclib_under_isolated_mode(self):
+        for name in ("doc_audit.py", "repo_inventory.py", "slop_scan.py", "verify_refs.py", "export_doc.py"):
+            r = self.run_script(name, "--help")
+            self.assertEqual(r.returncode, 0, "%s: %s" % (name, r.stderr.decode("utf-8", "replace")))
+
+    def test_report_survives_a_legacy_console_code_page(self):
+        with tempfile.TemporaryDirectory() as d:
+            doc = os.path.join(d, "doc.md")
+            with open(doc, "w", encoding="utf-8") as f:
+                f.write("# Flow\n\nThe queue → the worker → the database. It’s a seamless, robust pipeline.\n")
+            env = dict(os.environ, PYTHONIOENCODING="cp1252")
+            r = self.run_script("slop_scan.py", doc, env=env)
+            self.assertNotIn(b"UnicodeEncodeError", r.stderr)
+            self.assertIn(b"score", r.stdout)
 
 if __name__ == "__main__":
     unittest.main()

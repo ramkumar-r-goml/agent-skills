@@ -33,6 +33,7 @@ import re
 import statistics
 import sys
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # find doclib under python -I
 import doclib
 
 EM = "—"
@@ -587,6 +588,7 @@ def expand(paths):
 
 
 def main(argv=None):
+    doclib.utf8_console()
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("files", nargs="+", help="files or directories to scan, or - for stdin")
     ap.add_argument("--json", action="store_true", help="emit JSON (same as --format json)")

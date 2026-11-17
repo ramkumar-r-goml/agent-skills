@@ -1,6 +1,6 @@
 # Converting documents with pandoc
 
-Write in Markdown in the repo, and treat Word, PDF, and HTML as build outputs. Do not hand-edit an exported file, because the next export overwrites the edit. When someone returns a marked-up Word file, read their comments, change the Markdown, and export again.
+Write in Markdown in the repo, and treat Word, PDF, and HTML as build outputs. Do not hand-edit an exported file, because the next export overwrites the edit. When someone returns a marked-up Word file, read their comments, change the Markdown, and export again. If the owner says their edited Word file is now the main version, the roles reverse: see section 9.
 
 Contents
 
@@ -12,7 +12,9 @@ Contents
 6. Multi-file documents
 7. A pipeline without the script
 8. Gotchas
-9. Check the output
+9. When the Word file becomes the source
+10. Finishing in Word on Windows
+11. Check the output
 
 ## 1. Default path: the export script
 
@@ -125,7 +127,8 @@ In CI, `pandoc/core` and `pandoc/latex` are official Docker images. Pin a versio
 - Repeated values combine: `--variable`, `--metadata`, and `--css` on the command line add to the same key in a defaults file. Set a value in one place only. Two `papersize` values become a list, and Typst rejects it.
 - Renamed flags: `--self-contained` became `--standalone --embed-resources` (2.19). `--highlight-style` and `--no-highlight` became `--syntax-highlighting` (3.8), and the old forms print a deprecation warning. Check `pandoc --version` before copying a recipe from the web.
 - Old packages: distro packages lag, and alerts need 3.1.10 or later. Without them, `> [!NOTE]` prints as a plain quote.
-- Word contents page: `--toc` in Word writes a field that fills in when updated. Tell the recipient to accept Word's update prompt, or press F9 on the table.
+- Word contents page: `--toc` in Word writes a field that fills in when updated, so the file opens with an empty contents list. On Windows with Word installed, run `scripts/finish_docx.ps1` (section 10). Otherwise tell the recipient to accept Word's update prompt, or press F9 on the table.
+- Duplicate title: a `title:` in YAML front matter plus an H1 with the same text prints the title twice. Keep the title in one place. The script promotes a lone leading H1 only when there is no `title:`.
 - Resource path: setting `--resource-path` removes the working directory from the search unless you list it.
 - Reference doc command: `-o` must come before `--print-default-data-file`.
 - Security: a Markdown line such as `![x](/etc/hosts)` embeds that local file in the output, so converting someone else's document can leak files. Use `--sandbox` on third-party input. It blocks this, and it also drops the document's own local images. It does not limit Lua filters or PDF engines, which can do anything your account can, so do not run a filter from an untrusted repo. With `--embed-resources`, absolute image URLs are downloaded.
@@ -133,7 +136,31 @@ In CI, `pandoc/core` and `pandoc/latex` are official Docker images. Pin a versio
 - Mermaid: this skill renders to PNG, because Mermaid's SVG uses `foreignObject`, which Word and Typst do not render reliably. Without `mmdc`, the source stays as a code block. Headless Chromium in CI often needs a Puppeteer config file, set through `MERMAID_PUPPETEER_CONFIG`.
 - Accessibility: PDFs are untagged by default. Typst 0.12 or later can produce PDF/A-2b, and LuaLaTeX with TeX Live 2025 can produce PDF/UA. If a recipient requires accessible files, Word export from `reference.docx` keeps real headings and alt text.
 
-## 9. Check the output
+## 9. When the Word file becomes the source
+
+Owners sometimes edit the exported Word file directly, add branding or a revision history, and declare it the main version. From then on, an export over that file destroys their work. Ask which file is the source whenever a `.docx` comes back. If it is the Word file:
+
+1. Back it up and record its hash before touching anything. A Word window left open on an old copy can save over your changes later, so compare the hash again before you replace or edit it.
+2. Import it with `--track-changes all` to a scratch Markdown file, and diff that against your Markdown after normalizing code spans and contents-list lines. Every difference is the owner's decision. Copy it into the Markdown; do not revert it.
+3. Make further changes in the Word file itself, through Word, and keep the Markdown in step for the next diff. Never run `export` with `-o` pointing at it.
+4. Run the checks of `SKILL.md` stage 4 again on the synced Markdown. An owner's edit can bring back a fact you had corrected.
+
+## 10. Finishing in Word on Windows
+
+Pandoc cannot fill a contents list or set table widths the way Word lays them out. On Windows with Word installed, `scripts/finish_docx.ps1` opens the export through COM, without showing Word, and fixes both:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/finish_docx.ps1 -Docx build/design.docx -Pdf build/design.pdf
+```
+
+It fills the contents list and its page numbers, and gives contents entries a hanging indent so numbers such as 5.10 line up. It sets fixed table widths and keeps each row on one page. The header row repeats on each page and stays with the row below it. Widths come from cell text lengths unless a JSON map passed with `-Widths` matches a table by its first headers and column count.
+
+- Exit code 4 means the file is locked, nearly always because the user has it open in Word. Do not close their Word. Export to a scratch path, finish that copy, and copy it over once they close the file.
+- Word can hang on a dialog it cannot show. The script runs Word in a background job with `-TimeoutSec` (default 180) and afterwards stops only the Word processes that started during the run.
+- `RPC_E_DISCONNECTED` (0x80010108) right after a save is harmless: the file is written. The script reports it as success.
+- To look at the pages, pass `-Pdf` and render the PDF to images. On Windows, `Windows.Data.Pdf` does this without extra installs.
+
+## 11. Check the output
 
 A successful exit does not prove the file looks right.
 

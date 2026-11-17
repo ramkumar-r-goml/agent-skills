@@ -32,6 +32,7 @@ import re
 import sys
 import time
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # find doclib under python -I
 import doclib
 import slop_scan
 import verify_refs
@@ -367,6 +368,7 @@ def render(res, limit):
 
 
 def main(argv=None):
+    doclib.utf8_console()
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("repo", help="repository root")
     ap.add_argument("--docs", nargs="*", help="files or directories to audit (default: discover prose files)")

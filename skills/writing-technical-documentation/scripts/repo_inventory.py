@@ -26,6 +26,7 @@ import os
 import re
 import sys
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # find doclib under python -I
 import doclib
 
 # Keeps default output readable; agent harnesses often truncate tool output past 10,000 to
@@ -409,6 +410,7 @@ def render(inv, limit):
 
 
 def main(argv=None):
+    doclib.utf8_console()
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("repo", help="path to the repository root")
     ap.add_argument("--json", action="store_true", help="emit full JSON")
