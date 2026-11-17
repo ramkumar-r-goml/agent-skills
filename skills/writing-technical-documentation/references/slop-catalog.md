@@ -1,6 +1,6 @@
 # AI writing pattern catalog
 
-Patterns that mark text as machine-generated or machine-flavored, with the fix for each. Use it during the prose pass and when cleaning someone's draft. Run `scripts/slop_scan.py` first; it covers the lexical and formatting patterns and some structure. The semantic ones need your judgment. Sources include Wikipedia's "Signs of AI writing", which editors keep current.
+Patterns that mark text as machine-generated or machine-flavored, with the fix for each. Use it during the prose pass and when cleaning someone's draft. Run `scripts/slop_scan.py` first; it covers the lexical and formatting patterns and some structure. The semantic ones need your judgment. It draws on Wikipedia's "Signs of AI writing" (CC BY-SA 4.0, https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing), which editors keep current, and on the other sources in `docs/sources-and-licenses.md`.
 
 Contents
 0. How to use this catalog

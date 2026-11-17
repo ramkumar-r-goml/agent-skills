@@ -66,8 +66,20 @@ Nothing is copied verbatim, so no license here requires a notice. The `NOTICE` f
 - humanizer: "Some pattern ideas come from blader/humanizer (MIT)."
 - stop-slop: "Some pattern ideas come from hardikpandya/stop-slop (MIT), by Hardik Pandya."
 
-## Open questions
+## Decisions and checks
 
-1. `references/slop-catalog.md` was written before this register existed. It has not been compared line by line with the Wikipedia page. Word lists and pattern names are not a concern. If any full sentences or examples were copied from Wikipedia, that file would need CC BY-SA attribution and share-alike terms, or a rewrite of those lines.
-2. Rows marked `memory` should be confirmed on the source before a public release.
-3. arc42 headings: this skill paraphrases the twelve areas. Using the exact arc42 heading names with credit is common practice, but the template is CC BY-SA 4.0, so that choice is left to the maintainer.
+1. Wikipedia "Signs of AI writing" (CC BY-SA 4.0). The page could not be fetched from the session that wrote this, so a line-by-line comparison with `references/slop-catalog.md` has not been done. Safe handling until it is: the catalog credits the page and links it in its introduction, and `NOTICE` lists it. The catalog's own wording is meant to be original. To finish the check, save the page text as `wiki.txt` and run:
+   ```
+   python3 - <<'PY'
+   import re
+   w=re.findall(r"\w+",open("wiki.txt").read().lower())
+   c=re.findall(r"\w+",open("skills/writing-technical-documentation/references/slop-catalog.md").read().lower())
+   n=8
+   g={" ".join(w[i:i+n]) for i in range(len(w)-n)}
+   hits=[" ".join(c[i:i+n]) for i in range(len(c)-n) if " ".join(c[i:i+n]) in g]
+   print(len(hits),"shared 8-word runs"); print("\n".join(hits[:40]))
+   PY
+   ```
+   Rewrite any line with a shared run of 8 words or more. Word lists and pattern names are facts about language and do not need rewriting.
+2. arc42 headings. Decided: keep the paraphrase. `doc-styles.md` tells the agent to take exact headings from the developer's own arc42 template, so no CC BY-SA text is bundled in this repo.
+3. Rows marked `memory` above need a license check on the source before a public release.
