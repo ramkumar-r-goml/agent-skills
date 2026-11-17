@@ -1,0 +1,10 @@
+agent-skills
+
+This project is licensed under the MIT License (see LICENSE).
+
+It adapts or draws ideas from the following works. Nothing is copied verbatim from sources that have no license or a share-alike license. Full detail is in docs/sources-and-licenses.md.
+
+- ADR template adapted from MADR (https://adr.github.io/madr/), MIT or CC0-1.0.
+- Change categories follow Keep a Changelog 1.1.0 (https://keepachangelog.com), MIT, by Olivier Lacan.
+- Some AI-writing pattern ideas come from blader/humanizer (https://github.com/blader/humanizer), MIT.
+- Some AI-writing pattern ideas come from hardikpandya/stop-slop (https://github.com/hardikpandya/stop-slop), MIT, by Hardik Pandya.

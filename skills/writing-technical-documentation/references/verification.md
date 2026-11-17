@@ -5,12 +5,13 @@ Contents
 2. Evidence by claim type
 3. What you may run
 4. Hallucination checklist
-5. Evidence ledger format
-6. Marking unverified items
+5. Evidence notes and the ledger
+6. Marking unknowns: To confirm
 7. Links and references
 8. Staleness and drift
 9. Reader test and reviews
 10. Final verification report
+11. Working without scripts
 
 ## 1. Why verification is the main defense
 
@@ -68,7 +69,17 @@ Check each of these in every draft:
 - Steps that skip a prerequisite you had set up on your machine
 - Planned work described as shipped
 
-## 5. Evidence ledger format
+## 5. Evidence notes and the ledger
+
+Default, for most documents: a light note per fact, kept in your scratch space outside the repo. One line each: the claim, and its source (`path:line`, command and output, test name, or the developer's answer). Anything with no source becomes a `To confirm` item, section 6.
+
+```
+Server listens on 8081 | src/server.py:14
+Worker retries 3 times | src/client.py:52 (MAX_RETRIES = 3)
+p99 under 50 ms | no source: To confirm
+```
+
+Use the full ledger below for audits, handovers, and documents others will rely on without reading code. It adds a status per row.
 
 Keep a scratch file outside the repo:
 
@@ -89,9 +100,9 @@ Check the ledger before drafting, because an invented citation is as bad as an i
 python3 scripts/verify_refs.py <draft.md> --repo <repo> --ledger <ledger.md>
 ```
 
-## 6. Marking unverified items
+## 6. Marking unknowns: To confirm
 
-Inline: `[unverified: <what is needed to confirm>]`. Keep them few and specific. Collect them in the final report. A doc delivered for publication should have none, or each should be agreed with the user. Do not use hedge words as a substitute for marking.
+Inline: `[To confirm: <what would settle it>]`. The older form `[unverified: ...]` means the same and the scripts accept both. Keep them few and specific. Collect them in the final report. A doc delivered for publication should have none, or each should be agreed with the user. Do not use hedge words as a substitute for marking.
 
 ## 7. Links and references
 
@@ -139,3 +150,15 @@ Short, in the closing message:
 - Not run, and why
 - Drift found: old doc claims that the code contradicts
 - Fast-rotting content: what to regenerate or retest, and when
+
+## 11. Working without scripts
+
+Every check here can be done by reading and searching.
+
+- Paths and names: search the repo for each one the draft cites. No match means it is wrong or must be marked.
+- Commands and flags: read the argument parser or `--help`. Run only what section 3 allows.
+- Links: open the file or fetch the page. Never include a URL you did not see.
+- Numbers and defaults: read the line of code or config that sets them.
+- Prose: read the draft once against the patterns in `references/slop-catalog.md`, then again for terms that change name between sections.
+
+Say in the report which checks you did by hand and which you skipped.

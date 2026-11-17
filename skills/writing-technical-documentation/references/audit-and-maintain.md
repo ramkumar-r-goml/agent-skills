@@ -73,7 +73,7 @@ Default order for a repo with little documentation:
 5. Reference generated from contracts: OpenAPI, CLI help, schemas, type annotations.
 6. ADRs from this point on, for new decisions.
 
-Build one document at a time and get approval between them. If a request is "document everything", propose this order and say what you would skip.
+If a request is "document everything" or "prepare the technical documentation", the default is one overall technical document: `references/types/technical-document.md`. Offer this order only when the developer wants a doc set. Build one document at a time and show each before starting the next.
 
 Layout, once there are several pages:
 

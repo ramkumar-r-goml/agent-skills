@@ -1,8 +1,38 @@
 # Diagrams
 
-Draw a diagram when relationships are the point: components and data flow, a sequence across services, a state machine, a deployment topology. Do not draw a diagram of a list. Write diagrams as code so they diff, review, and update with the repo. Default to Mermaid, because GitHub and GitLab render it inline. Use PlantUML, D2, or Structurizr only if the repo already does.
+A diagram is optional. Ask at intake which case applies, then follow it.
 
-## Choose the diagram
+Contents
+1. The developer already has diagrams
+2. New diagrams are needed
+3. No diagrams
+4. Choose the diagram
+5. Syntax that breaks
+
+## 1. The developer already has diagrams
+
+Their diagrams stay theirs. Embed them and check them. Do not redraw them, and do not convert a diagram to another notation unless asked.
+
+- Embed with a relative link to the file (PNG, SVG, draw.io export, Mermaid or PlantUML source). Keep the source file next to the export if one exists, and name both.
+- Add a caption naming what the diagram shows, and a one-sentence alt text stating the main facts, so the document stands without the image.
+- Check the diagram against the code: every box against a real service, module, or store; every arrow against a real call or data flow. Report each mismatch with its evidence. Do not edit the diagram.
+- Say the date or version the diagram reflects, if it carries one. If it carries none, say that it is undated.
+- If a diagram is a picture only (screenshot, whiteboard photo), describe it in text, and say the contents could not be checked mechanically.
+- In Word or PDF output, check that the image is present and readable at page width.
+
+## 2. New diagrams are needed
+
+Draw a diagram when relationships are the point: components and data flow, a sequence across services, a state machine, a deployment topology. Do not draw a diagram of a list. Write diagrams as code so they diff, review, and update with the repo. Default to Mermaid, because GitHub and GitLab render it inline. Use PlantUML, D2, or Structurizr only if the repo already does, or the developer asks.
+
+Ask which diagrams the developer wants. If they say "you decide", start with a system context and a container view, and add a sequence for the one flow that crosses services. Stop there unless a reader needs more.
+
+Rules for each new diagram are in the sections below.
+
+## 3. No diagrams
+
+Write none. Describe structure in a table of components (name, responsibility, technology, location) and numbered flows with file references. Do not leave a heading for a diagram that is not there.
+
+## 4. Choose the diagram
 
 | Question the reader has | Diagram | Mermaid type |
 |---|---|---|
@@ -15,7 +45,7 @@ Draw a diagram when relationships are the point: components and data flow, a seq
 
 The C4 model's authors say context and container diagrams are enough for most teams. Add component diagrams only where a reader needs them, and skip code-level diagrams, since the code and an IDE show that. Mermaid's native C4 syntax is marked experimental, so use a flowchart and follow C4's notation.
 
-## Rules
+### Rules for new diagrams
 
 - Evidence first. Take boxes from config, IaC, or imports, and arrows from real calls. A diagram is a set of claims, so an arrow without a caller is a fabrication.
 - One question per diagram. Split it before you shrink the text.
@@ -25,7 +55,7 @@ The C4 model's authors say context and container diagrams are enough for most te
 - Do not rely on color alone. Check it works in greyscale.
 - Date or version a diagram that can drift, and check it against the code when the doc changes.
 
-## Accessibility
+### Accessibility
 
 Every diagram gets `accTitle` and `accDescr`, placed right after the declaration line. Mermaid writes them into the SVG, and this skill's pandoc filter uses them as alt text in Word and PDF. Put the same facts in prose next to the diagram when a reader must act on them.
 
@@ -63,7 +93,7 @@ sequenceDiagram
 ```
 ````
 
-## Syntax that breaks
+## 5. Syntax that breaks
 
 - Quote labels that contain parentheses, brackets, or punctuation: `api["Orders API (v2)"]`.
 - The word `end` in lowercase breaks flowcharts and sequence diagrams. Quote it or capitalize it.

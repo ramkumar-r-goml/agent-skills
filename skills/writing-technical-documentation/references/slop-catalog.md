@@ -208,6 +208,24 @@ The first sentence under a heading repeats the heading ("## Configuration" then 
 ### 4.32 Writing about the document
 "This section explains", "The following table shows", "as this guide demonstrates". Fix: state the content.
 
+### 4.33 False agency
+A thing does what only a person or a named piece of code can do: "the data tells us", "the config decides", "the system wants". Fix: name the code or person that acts. "`retry.py` sleeps 2 seconds, then retries."
+
+### 4.34 Narrator from a distance
+The text describes the system as if watching it from far away: "one can see that requests flow through the gateway". Fix: say what happens, to what, in the order it happens, with a path.
+
+### 4.35 Appeal to familiarity
+"As most developers know", "you have probably seen". It flatters or hedges and carries no fact. Fix: state the fact, or link the concept.
+
+### 4.36 Announced counts
+"Three key components", "five main benefits" said before the list, often forced to fit. Fix: use the number of items that exist, and do not announce it.
+
+### 4.37 Analogy in place of mechanism
+"Think of the queue as a post office." The picture replaces what the queue does. Fix: name the mechanism and its limits. Keep an analogy only if the reader needs it and it is true in the details that matter.
+
+### 4.38 Candid asides
+"Honestly, this part is tricky", "to be fair, it is not perfect". It sounds open and says nothing. Fix: state the actual limit, its trigger, and its effect.
+
 ## 5. Paragraph and document structures
 
 ### 5.1 Preamble
@@ -269,6 +287,24 @@ Two or three consecutive sentences saying the same thing. Fix: keep the most spe
 
 ### 5.20 Lack of anything concrete
 A whole section with no names, numbers, paths, or commands. Fix: investigate and add, or delete.
+
+### 5.21 Tie-back ending
+The last line returns to the opening image or phrase to feel finished. Fix: end on the last fact.
+
+### 5.22 Self-echo
+A later paragraph repeats an earlier line almost word for word, as if new. Fix: delete the second.
+
+### 5.23 Premise stacking
+Several loose claims are lined up, then a conclusion follows from none of them. Fix: one claim, its evidence, then the consequence.
+
+### 5.24 One point stretched
+A single idea fills a section, restated at different levels of formality. Fix: say it once. If there is no second point, merge the section into its neighbor.
+
+### 5.25 Question-word headings
+Sections titled "What is X", "Why X", "How X works" in a row, with no content that depends on the question. Fix: headings that name the thing or the task ("Retry behavior", "Deploy to staging").
+
+### 5.26 Despite-its-challenges formula
+A paragraph lists problems, then one sentence says the system overcomes them, with no mechanism. Fix: for each problem, name the mitigation, or list it as an open issue.
 
 ## 6. Tone and stance
 

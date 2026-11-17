@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: vague-document-project
+expected_outcome: |
+  The agent takes a vague request and either writes an editable brief and outline first, or goes straight to one overall technical document with a table of contents. Facts match the code, unknowns are marked To confirm, and the stale README claims are reported.
+context:
+  scaffold_script: place-files.sh

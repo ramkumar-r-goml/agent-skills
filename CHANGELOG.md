@@ -4,6 +4,20 @@ All notable changes to this repo are documented here. This project follows [Sema
 
 ## [Unreleased]
 
+### Added
+
+- `writing-technical-documentation`: one overall technical document as the default for a vague request (`references/types/technical-document.md`), with a table of contents built from the developer's own outline or a default by project kind (`references/outlines.md`).
+- `assets/templates/docs-brief.md`, an editable intake file the agent writes and the developer edits before drafting.
+- `references/doc-styles.md`, about 35 documentation types and standards (arc42, C4, HLD, LLD, IEEE 1016, SRS, test documentation, threat model, data dictionary, handover, and more) mapped to the type files.
+- Diagram guidance for three cases: existing diagrams, new diagrams, none.
+- Six AI-writing patterns in `references/slop-catalog.md` (false agency, analogy in place of mechanism, tie-back ending, and others).
+- `docs/sources-and-licenses.md` and `NOTICE`. Two eval cases: a vague request and a developer-supplied table of contents.
+
+### Changed
+
+- The nine-step checklist is now five stages with one stop. Scripts are optional, and every check has a by-hand route.
+- Unknowns are marked `[To confirm: ...]`. `[unverified: ...]` is still accepted.
+
 ## [2.0.0] - 2026-11-06
 
 ### Added
