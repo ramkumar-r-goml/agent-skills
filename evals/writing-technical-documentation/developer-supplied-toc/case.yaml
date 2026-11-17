@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: developer-supplied-toc
+expected_outcome: |
+  A document whose top-level headings are exactly the six the developer supplied, in order, with facts from the code and To confirm marks where the code cannot answer.
+context:
+  scaffold_script: place-files.sh

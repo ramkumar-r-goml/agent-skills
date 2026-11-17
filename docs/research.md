@@ -1,6 +1,6 @@
 # Research behind writing-technical-documentation
 
-What each rule in the skill rests on, checked on 2026-11-06. Update this page when a source changes. Sources marked "summary" were read through a fetch tool's summary rather than in full, so check the original before quoting a number from them.
+What each rule in the skill rests on, checked on 2026-11-06. Update this page when a source changes. Licenses and what was taken from each source are in [sources-and-licenses.md](sources-and-licenses.md). Sources marked "summary" were read through a fetch tool's summary rather than in full, so check the original before quoting a number from them.
 
 ## Skill format and authoring
 

@@ -207,7 +207,7 @@ PAIR_HEADING_WORDS = {
     "challenges", "opportunities", "benefits", "limitations", "advantages", "disadvantages", "legacy", "impact",
     "trends", "future", "outlook", "considerations", "recommendations", "features", "recognition", "awards",
 }
-UNVERIFIED_MARK = re.compile(r"\[unverified:[^\]\n]*\]", re.I)
+UNVERIFIED_MARK = re.compile(r"\[(?:unverified|to confirm):[^\]\n]*\]", re.I)
 
 
 def mask_regions(raw):
@@ -287,7 +287,7 @@ def scan(raw, mask=True, allow=()):
     # Link targets stay visible here, so "[Name](url)" is not mistaken for a "[Name]" placeholder.
     code_masked = doclib.mask_inline_code(doclib.split_code(text)[0]) if mask else text
     for m in re.finditer(PLACEHOLDERS, code_masked):
-        add("placeholder", 3, m.start(), m.end(), "fill with a verified fact, mark [unverified: ...], or delete", source=code_masked)
+        add("placeholder", 3, m.start(), m.end(), "fill with a verified fact, mark [To confirm: ...], or delete", source=code_masked)
 
     taken = []
     for rx in NEG_PARALLEL:

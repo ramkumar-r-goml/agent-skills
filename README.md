@@ -4,7 +4,7 @@
 
 | Skill | What it does |
 |---|---|
-| [writing-technical-documentation](skills/writing-technical-documentation/SKILL.md) | Writes, rewrites, audits, and exports technical docs from evidence in the code. Includes tools that inventory a repo, check a doc's references against it, flag AI writing patterns, audit a doc set, list docs a diff affects, and convert to Word, PDF, or HTML through pandoc. |
+| [writing-technical-documentation](skills/writing-technical-documentation/SKILL.md) | Writes, updates, audits, and exports technical docs from evidence in the code: one overall technical document with a table of contents (your own or a default), or any single type or named style. Includes tools that inventory a repo, check a doc's references against it, flag AI writing patterns, audit a doc set, list docs a diff affects, and convert to Word, PDF, or HTML through pandoc. |
 
 ## Install
 

@@ -4,7 +4,7 @@ This repo holds Agent Skills packages (https://agentskills.io/specification) und
 
 | Skill | Use it when |
 |---|---|
-| `skills/writing-technical-documentation/` | Writing, rewriting, or auditing READMEs, architecture overviews, design docs, ADRs, API or CLI reference, runbooks, onboarding guides, postmortems, migration guides, docstrings, or AGENTS.md files; making docs sound less like AI; converting docs to or from Word, PDF, or HTML. |
+| `skills/writing-technical-documentation/` | Preparing one overall technical document for a project, with the developer's own table of contents or a default; writing, rewriting, or auditing READMEs, architecture overviews, design docs, ADRs, API or CLI reference, runbooks, onboarding guides, postmortems, migration guides, docstrings, or AGENTS.md files; making docs sound less like AI; converting docs to or from Word, PDF, or HTML. |
 
 Read a skill's `SKILL.md` first. Read files in its `references/` folder only when `SKILL.md` points to them.
 
