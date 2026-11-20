@@ -5,6 +5,7 @@
 | Skill | What it does |
 |---|---|
 | [writing-technical-documentation](skills/writing-technical-documentation/SKILL.md) | Writes, updates, audits, and exports technical docs from evidence in the code: one overall technical document with a table of contents (your own or a default), or any single type or named style. Includes tools that inventory a repo, check a doc's references against it, flag AI writing patterns, audit a doc set, list docs a diff affects, and convert to Word, PDF, or HTML through pandoc. |
+| [developer-handover-from-proposal](skills/developer-handover-from-proposal/SKILL.md) | Turns a client project proposal into a developer handover document of at most 3 pages: context, resources, architecture, data and metrics, workflow, milestones, risks, and checkable acceptance tests. Marks each item fixed, recommended, open, or agreed after the proposal, and asks for or flags every gap instead of inventing it. |
 
 ## Install
 

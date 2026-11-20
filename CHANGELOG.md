@@ -6,6 +6,7 @@ All notable changes to this repo are documented here. This project follows [Sema
 
 ### Added
 
+- `developer-handover-from-proposal`: turns a client proposal into a developer handover document of at most 3 pages, with a fixed section structure, FIXED / RECOMMENDED / OPEN / POST-PROPOSAL tagging, and checkable acceptance tests.
 - `writing-technical-documentation`: one overall technical document as the default for a vague request (`references/types/technical-document.md`), with a table of contents built from the developer's own outline or a default by project kind (`references/outlines.md`).
 - `assets/templates/docs-brief.md`, an editable intake file the agent writes and the developer edits before drafting.
 - `references/doc-styles.md`, about 35 documentation types and standards (arc42, C4, HLD, LLD, IEEE 1016, SRS, test documentation, threat model, data dictionary, handover, and more) mapped to the type files.
